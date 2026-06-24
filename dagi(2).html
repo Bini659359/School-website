@@ -1,0 +1,584 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BrightPath School — Modern Responsive Template</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0f1724; --card:#0b1220; --muted:#9aa4b2; --accent:#6ee7b7; --accent-2:#7dd3fc;
+      --glass: rgba(255,255,255,0.04);
+      color-scheme: dark;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    [data-theme="light"]{
+      --bg:#f6fafb; --card:#ffffff; --muted:#475569; --accent:#0ea5a3; --accent-2:#0284c7; --glass: rgba(0,0,0,0.04); color-scheme: light;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; background:linear-gradient(180deg,var(--bg), #071021 120%);
+      color: #e6eef6; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      padding: 0 1rem;
+      transition: background .35s ease, color .35s ease;
+    }
+
+    /* Container */
+    .site{
+      max-width:1100px; margin: 28px auto; display:flex; flex-direction:column; gap:28px;
+    }
+
+    /* Header / Nav */
+    header{display:flex; align-items:center; justify-content:space-between; gap:12px}
+    .brand{display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit}
+    .logo{
+      width:56px; height:56px; border-radius:10px; display:grid; place-items:center;
+      background:linear-gradient(135deg,var(--accent), var(--accent-2));
+      box-shadow: 0 6px 18px rgba(7,18,28,0.5);
+      color:#07212a; font-weight:800; letter-spacing:0.6px;
+      font-size:18px;
+    }
+    nav{display:flex; gap:16px; align-items:center}
+    nav a{color:var(--muted); text-decoration:none; padding:8px 12px; border-radius:8px; font-weight:600}
+    nav a:hover{background:var(--glass); color:inherit}
+    .cta{background:linear-gradient(90deg,var(--accent),var(--accent-2)); padding:8px 14px; border-radius:10px; color:#042026; font-weight:700}
+    .controls{display:flex; gap:10px; align-items:center}
+
+    /* Mobile nav */
+    .burger{display:none; background:transparent;border:0;color:var(--muted); font-size:22px; cursor:pointer}
+    .mobile-menu{display:none; flex-direction:column; gap:8px; margin-top:8px}
+
+    /* Hero */
+    .hero{
+      display:grid; grid-template-columns:1fr 380px; gap:26px; align-items:center;
+
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      border-radius:18px; padding:26px; box-shadow: 0 10px 30px rgba(2,6,23,0.5);
+      backdrop-filter: blur(6px);
+    }
+    .hero h1{font-size:28px; margin:0 0 10px 0; line-height:1.02}
+    .hero p{margin:0; color:var(--muted)}
+    .hero-cta{margin-top:16px; display:flex; gap:12px; align-items:center}
+    .btn{padding:10px 14px; border-radius:10px; font-weight:700; border:0; cursor:pointer}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:#032026}
+    .btn-ghost{background:transparent; color:var(--muted); border:1px solid rgba(255,255,255,0.03)}
+
+    /* Stats / cards */
+    .cards{display:flex; gap:12px; margin-top:14px; flex-wrap:wrap}
+    .card{background:var(--card); padding:14px; border-radius:12px; min-width:160px; flex:1 1 160px; box-shadow: 0 6px 16px rgba(2,6,23,0.5)}
+    .card h3{margin:0 0 6px 0; font-size:16px}
+    .card p{margin:0; color:var(--muted); font-size:13px}
+
+    /* Courses grid */
+    .section{background:transparent; padding:18px; border-radius:14px}
+    .section h2{margin:0 0 12px 0}
+    .filters{display:flex; gap:8px; margin-bottom:12px; flex-wrap:wrap}
+    .chip{padding:8px 10px; border-radius:999px; background:var(--card); color:var(--muted); cursor:pointer; border:1px solid transparent}
+    .chip.active{background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:#042026; font-weight:700}
+
+    .grid{display:grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap:14px}
+    .course{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      padding:14px; border-radius:12px; display:flex; flex-direction:column; gap:10px;
+    }
+    .course .meta{display:flex; justify-content:space-between; align-items:center; gap:10px}
+    .progress{height:8px; background:rgba(255,255,255,0.03); border-radius:999px; overflow:hidden}
+    .progress > i{display:block; height:100%; width:60%; background:linear-gradient(90deg,var(--accent),var(--accent-2))}
+
+    /* Teachers & testimonials */
+    .row{display:flex; gap:14px; flex-wrap:wrap}
+    .teacher{display:flex; gap:12px; background:var(--card); padding:12px; border-radius:12px; align-items:center}
+    .avatar{width:56px; height:56px; border-radius:12px; background:linear-gradient(135deg,var(--accent),var(--accent-2)); display:grid; place-items:center; font-weight:800; color:#042026}
+img{
+ width:56px; height:56px; border-radius:12px;display:grid; place-items:center; font-weight:800; color:#042026
+}
+    .testimonial{background:linear-gradient(90deg, rgba(255,255,255,0.02), transparent); padding:14px; border-radius:12px}
+
+    /* Contact */
+    form{display:grid; gap:10px}
+    label{font-size:13px; color:var(--muted)}
+    input,textarea,select{
+      padding:10px; border-radius:10px; border:1px solid rgba(255,255,255,0.03);
+      background:transparent; color:inherit; outline:none;
+    }
+    .muted{color:var(--muted); font-size:13px}
+
+    /* Footer */
+    footer{display:flex; justify-content:space-between; gap:12px; color:var(--muted); padding:12px 4px}
+
+    /* Utilities */
+    .center{display:grid; place-items:center}
+    .hidden{display:none}
+    .pill{padding:6px 10px; border-radius:999px; background:var(--glass); font-weight:700; color:var(--muted); font-size:13px}
+
+    /* Animations */
+    .fade-up{opacity:0; transform:translateY(10px); animation:fadeUp .6s forwards}
+    @keyframes fadeUp{to{opacity:1; transform:none}}
+
+    /* Responsive */
+    @media (max-width:880px){
+      .hero{grid-template-columns:1fr; padding:18px}
+      nav{display:none}
+      .burger{display:inline-flex}
+      .mobile-menu{display:flex}
+      .site{margin:18px auto}
+    }
+  #mn{display: flex;
+   border-radius: 10px;
+ 
+  }
+  #cv{
+    border-radius: 10px;
+  }
+  </style>
+</head>
+<body>
+  <div id="cv">
+  <div class="site" id="app" data-theme="dark">
+    <header class="fade-up" style="animation-delay:.05s">
+      <a class="brand" href="#" aria-label="BrightPath Home">
+        <div class="logo" aria-hidden="true">BP</div>
+        <div>
+          <div style="font-weight:800">BrightPath School</div>
+          <div class="muted" style="font-size:13px">Learn. Grow. Excel.</div>
+        </div>
+      </a>
+
+      <nav aria-label="Main navigation">
+        <a href="#courses">Courses</a>
+        <a href="#teachers">Teachers</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#contact" class="cta">Enroll</a>
+      </nav>
+
+      <div class="controls">
+        <button class="pill" id="themeToggle" title="Toggle theme">🌙</button>
+        <button class="burger" id="openMenu" aria-expanded="false" aria-controls="mobileMenu">☰</button>
+      </div>
+    </header>
+
+    <div id="mobileMenu" class="mobile-menu" role="menu" aria-hidden="true">
+      <a href="#courses">Courses</a>
+      <a href="#teachers">Teachers</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#contact">Contact</a>
+    </div>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero fade-up" style="animation-delay:.08s">
+        <div>
+          <h1>Inspire curiosity. Teach with purpose.</h1>
+          <p class="muted">A modern school website template with responsive layout, course catalog, teacher profiles, testimonials and an interactive enrollment form.</p>
+
+          <div class="hero-cta">
+            <button class="btn btn-primary" id="quickEnroll">Get Started</button>
+            <button class="btn btn-ghost" id="viewCourses">View Courses</button>
+          </div>
+
+          <div class="cards" style="margin-top:18px">
+            <div class="card">
+              <h3>120+</h3>
+              <p>Active Students</p>
+            </div>
+            <div class="card">
+              <h3>42</h3>
+              <p>Courses</p>
+            </div>
+            <div class="card">
+              <h3>15</h3>
+              <p>Certified Teachers</p>
+            </div>
+          </div>
+        </div>
+        <!-- TESTIMONIALS -->
+      <section id="testimonials" class="section fade-up" style="animation-delay:.17s">
+        <h2>Our directors</h2>
+        <div id="carousel" style="display:flex; gap:12px; overflow:hidden">
+          <div class="testimonial" style="min-width:340px;">
+            <strong>Mr.Bellay</strong>
+            <p class="muted">"Core-director of N.M.P.S"</p>
+          </div>
+          <div class="testimonial" style="min-width:340px;">
+            <strong>Mr.Mihret Adane</strong>
+            <p class="muted">"Vice-director of N.M.P.S"</p>
+          </div>
+          <div class="testimonial" style="min-width:340px;">
+            <strong>Mr.Misgan & Mr.</strong>
+            <p class="muted">"Unit-director of N.M.P.S"</p>
+          </div>
+        </div>
+       
+
+ 
+        <div style="margin-top:10px; display:flex; gap:8px">
+          <button id="prev" class="chip">‹</button>
+          <button id="next" class="chip">›</button>
+        </div>
+      </section>
+        </br>
+        <br id="mn">
+
+        <aside class="center" aria-hidden="false">
+          <div style="width:100%; max-width:360px; background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent); padding:18px; border-radius:14px;">
+            <strong>Next Cohort</strong>
+            <div class="muted" style="margin-top:8px">Starts in</div>
+            <div id="countdown" style="font-size:26px; font-weight:800; margin-top:8px">00d 00h 00m</div>
+            <div style="margin-top:12px; display:flex; gap:8px">
+              <button class="btn btn-primary" id="remindMe">Remind Me</button>
+              <button class="btn btn-ghost" id="curriculum">Curriculum</button>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <!-- COURSES -->
+      <section id="courses" class="section fade-up" style="animation-delay:.11s">
+        <h2>Featured Courses</h2>
+        <div class="filters" aria-hidden="false" id="filters">
+          <button class="chip active" data-filter="all">All</button>
+          <button class="chip" data-filter="science">Science</button>
+          <button class="chip" data-filter="math">Math</button>
+          <button class="chip" data-filter="arts">Arts</button>
+          <button class="chip" data-filter="code">Coding</button>
+        </div>
+
+        <div class="grid" id="coursesGrid" aria-live="polite">
+          <!-- Course cards dynamically inserted -->
+        </div>
+      </section>
+
+      <!-- TEACHERS -->
+      <section id="teachers" class="section fade-up" style="animation-delay:.14s">
+        <h2>contact us with</h2>
+        <div class="row">
+          <div class="teacher">
+            <a class="avatar" href="https://t.me/nefasmewucha_preparatory_school"><img src="Home.png"></a>
+            <div>
+              <div style="font-weight:700">Telegram</div>
+              <div class="muted">NefasMewucha praparatory school</div>
+            </div>
+          </div>
+
+          <div class="teacher">
+            <a class="avatar" href="https://www.facebook.com/southgedu/"><img src="Hom.png"></a>
+            <div>
+              <div style="font-weight:700">Lite</div>
+              <div class="muted">Facebook</div>
+            </div>
+          </div>
+
+          <div class="teacher">
+            <div class="avatar">KT</div>
+            <div>
+              <div style="font-weight:700">Kidusan Tadesse</div>
+              <div class="muted">Computer Science • 6 yrs exp</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- CONTACT / ENROLL -->
+      <section id="contact" class="section fade-up" style="animation-delay:.20s">
+        <h2>Enroll / Contact</h2>
+        <div style="display:grid; gap:12px; grid-template-columns: 1fr 360px;">
+          <div>
+            <form id="enrollForm" novalidate>
+              <div>
+                <label for="name">Full name</label>
+                <input id="name" name="name" required placeholder="Jane Doe" />
+              </div>
+              <div>
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" required placeholder="you@mail.com" />
+              </div>
+              <div>
+                <label for="courseSelect">Interested course</label>
+                <select id="courseSelect" name="course">
+                  <option value="" disabled selected>Select course</option>
+                </select>
+              </div>
+              <div>
+                <label for="message">Message (optional)</label>
+                <textarea id="message" rows="4" placeholder="Tell us your goals..."></textarea>
+              </div>
+
+              <div style="display:flex; gap:10px; margin-top:8px;">
+                <button class="btn btn-primary" type="submit">Submit Enrollment</button>
+                <button class="btn btn-ghost" type="button" id="resetForm">Reset</button>
+              </div>
+
+              <div id="formMsg" class="muted"></div>
+              <!-- LOGIN MODAL -->
+<div id="authBox" class="hidden" style="
+position:fixed; inset:0; background:rgba(0,0,0,0.7);
+display:grid; place-items:center; z-index:999;">
+  
+  <div style="background:var(--card); padding:20px; border-radius:14px; width:300px;">
+    <h3 id="authTitle">Login</h3>
+
+    <input id="authEmail" placeholder="Email" style="width:100%; margin:6px 0; padding:10px; border-radius:8px;">
+    <input id="authPass" type="password" placeholder="Password" style="width:100%; margin:6px 0; padding:10px; border-radius:8px;">
+
+    <button id="authSubmit" class="btn btn-primary" style="width:100%; margin-top:10px;">Submit</button>
+    <button id="switchAuth" class="btn btn-ghost" style="width:100%; margin-top:6px;">Create account</button>
+    <button onclick="authBox.classList.add('hidden')" class="btn btn-ghost" style="width:100%; margin-top:6px;">Close</button>
+
+    <div id="authMsg" class="muted"></div>
+  </div>
+</div><button class="pill" id="openAuth">Login</button>
+            </section>
+          </div>
+          <div id="chatbot" style="
+position:fixed; bottom:20px; right:20px; width:300px;
+background:rgba(0,0,0,0.8); backdrop-filter:blur(10px);
+border-radius:15px; overflow:hidden; color:white; font-family:sans-serif;">
+
+  <div style="padding:10px; background:#00f2fe; color:black; font-weight:bold;">
+    🤖 AI Assistant
+  </div>
+
+  <div id="chatMessages" style="height:250px; overflow-y:auto; padding:10px;"></div>
+
+  <div style="display:flex;">
+    <input id="chatInput" placeholder="Type..." 
+      style="flex:1; padding:10px; border:none; outline:none;">
+    <button onclick="sendMsg()" style="padding:10px;">➤</button>
+  </div>
+</div>
+          </body>
+       <script>
+// ===================== THEME TOGGLE WITH SAVE =====================
+const themeToggle = document.getElementById("themeToggle");
+const app = document.getElementById("app");
+
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme) app.setAttribute("data-theme", savedTheme);
+
+themeToggle.onclick = () => {
+  const current = app.getAttribute("data-theme");
+  const newTheme = current === "dark" ? "light" : "dark";
+  app.setAttribute("data-theme", newTheme);
+  localStorage.setItem("theme", newTheme);
+};
+
+// ===================== COURSE DATA =====================
+const courses = [
+  {name:"Physics Basics", category:"science"},
+  {name:"Advanced Math", category:"math"},
+  {name:"Drawing & Design", category:"arts"},
+  {name:"JavaScript Coding", category:"code"},
+  {name:"Biology", category:"science"},
+  {name:"Algebra", category:"math"}
+];
+
+const grid = document.getElementById("coursesGrid");
+const select = document.getElementById("courseSelect");
+
+// ===================== LOAD COURSES =====================
+function loadCourses(filter="all"){
+  grid.innerHTML = "";
+  select.innerHTML = '<option disabled selected>Select course</option>';
+
+  courses
+    .filter(c => filter==="all" || c.category===filter)
+    .forEach(c => {
+      // grid
+      const div = document.createElement("div");
+      div.className = "course";
+      div.innerHTML = `
+        <strong>${c.name}</strong>
+        <div class="meta">
+          <span class="pill">${c.category}</span>
+        </div>
+        <div class="progress"><i></i></div>
+      `;
+      grid.appendChild(div);
+
+      // dropdown
+      const opt = document.createElement("option");
+      opt.value = c.name;
+      opt.textContent = c.name;
+      select.appendChild(opt);
+    });
+}
+
+loadCourses();
+
+// ===================== FILTER BUTTONS =====================
+document.querySelectorAll(".chip").forEach(btn=>{
+  btn.onclick = ()=>{
+    document.querySelectorAll(".chip").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    loadCourses(btn.dataset.filter);
+  }
+});
+
+// ===================== SEARCH FEATURE =====================
+const searchInput = document.createElement("input");
+searchInput.placeholder = "Search courses...";
+searchInput.style.padding = "10px";
+searchInput.style.borderRadius = "10px";
+searchInput.style.marginBottom = "10px";
+searchInput.style.width = "100%";
+
+document.getElementById("courses").prepend(searchInput);
+
+searchInput.oninput = () => {
+  const value = searchInput.value.toLowerCase();
+  const filtered = courses.filter(c => c.name.toLowerCase().includes(value));
+
+  grid.innerHTML = "";
+  filtered.forEach(c => {
+    const div = document.createElement("div");
+    div.className = "course";
+    div.innerHTML = `<strong>${c.name}</strong>`;
+    grid.appendChild(div);
+  });
+};
+
+// ===================== FORM VALIDATION =====================
+const form = document.getElementById("enrollForm");
+const msg = document.getElementById("formMsg");
+
+form.onsubmit = (e)=>{
+  e.preventDefault();
+
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+
+  if(name.length < 3){
+    msg.textContent = "Name must be at least 3 characters!";
+    return;
+  }
+
+  if(!email.includes("@")){
+    msg.textContent = "Enter a valid email!";
+    return;
+  }
+
+  msg.textContent = "✅ Enrollment submitted successfully!";
+  form.reset();
+};
+
+// ===================== SMOOTH SCROLL =====================
+document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
+  anchor.onclick = function(e){
+    e.preventDefault();
+    document.querySelector(this.getAttribute("href")).scrollIntoView({
+      behavior: "smooth"
+    });
+  }
+});
+// ================= AUTH SYSTEM =================
+const authBox = document.getElementById("authBox");
+const openAuth = document.getElementById("openAuth");
+const authSubmit = document.getElementById("authSubmit");
+const switchAuth = document.getElementById("switchAuth");
+const authTitle = document.getElementById("authTitle");
+const authMsg = document.getElementById("authMsg");
+
+let isLogin = true;
+
+// open modal
+openAuth.onclick = () => authBox.classList.remove("hidden");
+
+// switch login/signup
+switchAuth.onclick = () => {
+  isLogin = !isLogin;
+  authTitle.textContent = isLogin ? "Login" : "Sign Up";
+  switchAuth.textContent = isLogin ? "Create account" : "Already have account?";
+};
+
+// submit
+authSubmit.onclick = () => {
+  const email = document.getElementById("authEmail").value;
+  const pass = document.getElementById("authPass").value;
+
+  let users = JSON.parse(localStorage.getItem("users") || "[]");
+
+  if(isLogin){
+    const user = users.find(u => u.email === email && u.pass === pass);
+    if(user){
+      localStorage.setItem("currentUser", email);
+      authMsg.textContent = "✅ Login successful!";
+      setTimeout(()=>authBox.classList.add("hidden"), 1000);
+    } else {
+      authMsg.textContent = "❌ Wrong email or password";
+    }
+  } else {
+    if(users.find(u => u.email === email)){
+      authMsg.textContent = "⚠️ User already exists";
+      return;
+    }
+    users.push({email, pass});
+    localStorage.setItem("users", JSON.stringify(users));
+    authMsg.textContent = "✅ Account created!";
+  }
+};
+
+// show logged user
+const currentUser = localStorage.getItem("currentUser");
+if(currentUser){
+  openAuth.textContent = "👤 " + currentUser;
+};
+const chatMessages = document.getElementById("chatMessages");
+
+function addMessage(text, sender){
+  const div = document.createElement("div");
+  div.style.margin = "6px 0";
+  div.innerHTML = `<strong>${sender}:</strong> ${text}`;
+  chatMessages.appendChild(div);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+// simple AI logic
+function botReply(input){
+  input = input.toLowerCase();
+
+  if(input.includes("hello")) return "Hi there! 👋";
+  if(input.includes("course")) return "We offer coding, science, and AI courses.";
+  if(input.includes("price")) return "Our courses are affordable for everyone.";
+  if(input.includes("bye")) return "Goodbye! 🚀";
+
+  return "I am still learning... 🤖";
+}
+
+function sendMsg(){
+  const input = document.getElementById("chatInput");
+  const text = input.value;
+
+  if(!text) return;
+
+  addMessage(text, "You");
+
+  setTimeout(()=>{
+    const reply = botReply(text);
+    addMessage(reply, "Bot");
+  }, 500);
+
+  input.value = "";
+};
+       fetch("https://api.openai.com/v1/chat/completions", {
+  method:"POST",
+  headers:{
+    "Authorization":"Bearer YOUR_API_KEY",
+    "Content-Type":"application/json"
+  },
+  body: JSON.stringify({
+    model:"gpt-4o-mini",
+    messages:[{role:"user", content:text}]
+  })
+})
+ 
+</script>
+</script>
+</script>
+ </script>
+        </html>
